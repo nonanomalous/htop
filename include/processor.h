@@ -3,11 +3,12 @@
 
 class Processor {
  public:
-  float Utilization();
+ Processor();
+ float Utilization();
   
  private:
+ long cached_total_ticks_{0};
  long cached_active_ticks_{0};
- long cached_idle_ticks_{0};
 };
 
 #endif
