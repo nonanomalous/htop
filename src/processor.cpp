@@ -6,6 +6,9 @@ Processor::Processor() {
     Processor::cached_active_ticks_ = LinuxParser::ActiveJiffies();
 }
 // TODO: Return the aggregate CPU utilization
+
+long Processor::GetTotalJiffies() { return cached_total_ticks_; }
+
 float Processor::Utilization() { 
     
     long total_ticks = LinuxParser::Jiffies();

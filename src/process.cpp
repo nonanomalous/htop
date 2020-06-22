@@ -4,12 +4,21 @@
 #include <string>
 #include <vector>
 
+#include "linux_parser.h"
 #include "process.h"
 
 using std::string;
 using std::to_string;
 using std::vector;
 
+Process::Process(const int pid, const long jiffies) : pid_(pid) {
+    Process::SetCpuUtilization(jiffies);
+}
+
+void Process::SetCpuUtilization(const long jiffies) {
+    long active_jiffies = LinuxParser::ActiveJiffies(Process::pid_);
+    Process::cpu_utilization_ = (float)active_jiffies / (float)jiffies;
+}
 
 int Process::Pid() { 
     return 0;
