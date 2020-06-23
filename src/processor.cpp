@@ -9,7 +9,6 @@ Processor::Processor() {
 long Processor::GetTotalJiffies() { return cached_total_ticks_; }
 
 float Processor::Utilization() { 
-    float utilization{0.0};
     long total_ticks = LinuxParser::Jiffies();
     long active_ticks = LinuxParser::ActiveJiffies();
 
@@ -18,8 +17,5 @@ float Processor::Utilization() {
     
     cached_total_ticks_ = total_ticks;
     cached_active_ticks_ = active_ticks;
-    utilization = (float)active_delta / (float)total_delta;
-    if (utilization > 1)
-        return 0.99;
-    return utilization;
+    return (float)active_delta / (float)total_delta;
     }
