@@ -16,13 +16,13 @@ using std::vector;
 
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() { 
     const vector<int> pids = LinuxParser::Pids();
     System::processes_.clear();
     for (auto pid : pids) {
         processes_.push_back(Process(pid, System::cpu_.GetTotalJiffies()));
     }
+    std::sort(processes_.begin(), processes_.end());
     return System::processes_; 
     }
 
